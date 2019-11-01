@@ -11,12 +11,18 @@ require 'awesome_print'
 # use wordnik to display pronunciation
 # make a loop so user can continue entering words
 
-p "enter a word"
-user_word = gets.chomp
+while true
 
-# user_word.downcase!
+  p "enter a word"
+  user_word = gets.chomp
 
-response = HTTP.get("https://api.wordnik.com/v4/word.json/#{user_word}/definitions?limit=200&includeRelated=false&useCanonical=false&includeTags=false&api_key=")
+  if user_word == "q"
+    break
+  end
+
+  # user_word.downcase!
+
+  response = HTTP.get("https://api.wordnik.com/v4/word.json/#{user_word}/definitions?limit=200&includeRelated=false&useCanonical=false&includeTags=false&api_key=")
 
 
 # definitions = response.parse
@@ -25,17 +31,18 @@ response = HTTP.get("https://api.wordnik.com/v4/word.json/#{user_word}/definitio
 #   p definition['text']
 # end
 
-text = response.parse[0]['text']
+# text = response.parse[0]['text']
 
-p text
+# p text
 
-response = HTTP.get("https://api.wordnik.com/v4/word.json/#{user_word}/topExample?useCanonical=false&api_key=")
+# response = HTTP.get("https://api.wordnik.com/v4/word.json/#{user_word}/topExample?useCanonical=false&api_key=")
 
-top_example = response.parse['text']
-p top_example
+# top_example = response.parse['text']
+# p top_example
 
-response = HTTP.get("https://api.wordnik.com/v4/word.json/#{user_word}/pronunciations?useCanonical=false&limit=50&api_key=")
+# response = HTTP.get("https://api.wordnik.com/v4/word.json/#{user_word}/pronunciations?useCanonical=false&limit=50&api_key=")
 
-pronunciation = response.parse[0]['raw']
+# pronunciation = response.parse[0]['raw']
 
-p pronunciation
+# p pronunciation
+end
