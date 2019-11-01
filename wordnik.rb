@@ -18,10 +18,24 @@ user_word = gets.chomp
 
 response = HTTP.get("https://api.wordnik.com/v4/word.json/#{user_word}/definitions?limit=200&includeRelated=false&useCanonical=false&includeTags=false&api_key=")
 
-# ap response.parse[0]['text']
-# text = response.parse[0]['text']
+
+# definitions = response.parse
+
+# definitions.each do |definition|
+#   p definition['text']
+# end
+
+text = response.parse[0]['text']
+
+p text
 
 response = HTTP.get("https://api.wordnik.com/v4/word.json/#{user_word}/topExample?useCanonical=false&api_key=")
 
-ap response.parse['text']
 top_example = response.parse['text']
+p top_example
+
+response = HTTP.get("https://api.wordnik.com/v4/word.json/#{user_word}/pronunciations?useCanonical=false&limit=50&api_key=")
+
+pronunciation = response.parse[0]['raw']
+
+p pronunciation
